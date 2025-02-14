@@ -26,7 +26,7 @@ const Phone = () => {
 
                     <div className="popup">
                         <p className="title">Bạn có tin nhắn từ Crush! 💌</p>
-                        <p>Em Đã Ăn Cơm Chưa 🍚?</p>
+                        <p>Em đã ăn Cơm chưa 🍚?</p>
                     </div>
                 </div>
             </div>
