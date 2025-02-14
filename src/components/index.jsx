@@ -1,38 +1,50 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "../assets/css/phone.css";
 
 const songs = [
     {
         title: "Hẹn em dưới ánh trăng",
-        src: "/src/assets/audio/hen-em-duoi-anh-trang.mp3",
-        cover: "/src/assets/images/hen-em-duoi-anh-trang.jpg"
+        src: "/audio/hen-em-duoi-anh-trang.mp3",
+        cover: "/images/hen-em-duoi-anh-trang.jpg"
     },
     {
         title: "Ôi Mất Rìu",
-        src: "/src/assets/audio/oi-mat-riu.mp3",
-        cover: "/src/assets/images/oi-mat-riu.jpg"
+        src: "/audio/oi-mat-riu.mp3",
+        cover: "/images/oi-mat-riu.jpg"
     },
     {
         title: "Em là nhất",
-        src: "/src/assets/audio/em-la-nhat.mp3",
-        cover: "/src/assets/images/em-la-nhat.jpg"
+        src: "/audio/em-la-nhat.mp3",
+        cover: "/images/em-la-nhat.jpg"
     },
     {
         title: "Người yêu không đá",
-        src: "/src/assets/audio/nguoi-yeu-ko-da.mp3",
-        cover: "/src/assets/images/nguoi-yeu-ko-da.jpg"
+        src: "/audio/nguoi-yeu-ko-da.mp3",
+        cover: "/images/nguoi-yeu-ko-da.jpg"
     },
     {
         title: "Định mệnh tình yêu",
-        src: "/src/assets/audio/dinh-menh-tinh-yeu.mp3",
-        cover: "/src/assets/images/dinh-menh-tinh-yeu.jpg"
+        src: "/audio/dinh-menh-tinh-yeu.mp3",
+        cover: "/images/dinh-menh-tinh-yeu.jpg"
     }
 ];
 
 const Phone = () => {
     const [currentSongIndex, setCurrentSongIndex] = useState(0);
     const [isPlaying, setIsPlaying] = useState(false);
-    const audioRef = useRef(new Audio(songs[currentSongIndex].src));
+    // const audioRef = useRef(new Audio(songs[currentSongIndex].src));
+
+    const audioRef = useRef(null);
+
+    useEffect(() => {
+        if (audioRef.current) {
+            audioRef.current.pause();
+        }
+        audioRef.current = new Audio(songs[currentSongIndex].src);
+        if (isPlaying) {
+            audioRef.current.play();
+        }
+    }, [currentSongIndex, isPlaying]);
 
     const togglePlay = () => {
         if (isPlaying) {
